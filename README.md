@@ -31,4 +31,4 @@ npm run dev
 - Requires Ollama running locally with llama3 model
 - Live NHL data pulled from the official NHL API
 - No API costs — fully local AI
-Then run the 3 git commands above.
+
