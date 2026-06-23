@@ -67,7 +67,6 @@ def get_live_nhl_data():
         gf    = team.get("goalsFor", 0)
         ga    = team.get("goalsAgainst", 0)
 
-        # Power-play % — live from API
         pp_pct_raw = team.get("powerPlayPct", None)
         if pp_pct_raw is not None:
             pp_pct = round(float(pp_pct_raw) * 100, 1)
@@ -76,7 +75,6 @@ def get_live_nhl_data():
             pp_opps = team.get("powerPlayOpportunities", 1)
             pp_pct  = round((pp_wins / pp_opps) * 100, 1) if pp_opps else 0.0
 
-        # Save % — live from API
         sv_pct_raw = team.get("savePct", None)
         if sv_pct_raw is not None:
             sv_pct = round(float(sv_pct_raw), 3)
