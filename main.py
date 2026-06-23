@@ -14,9 +14,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ─────────────────────────────────────────────
-#  Ollama helper (local, free, no API key)
-# ─────────────────────────────────────────────
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "llama3"
 
@@ -25,7 +22,7 @@ def ask_ollama(prompt: str) -> str:
         response = requests.post(
             OLLAMA_URL,
             json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
-            timeout=60,  # llama3 can be slow, give it time
+            timeout=60,  
         )
         if response.status_code != 200:
             raise HTTPException(status_code=502, detail=f"Ollama returned error: {response.status_code}")
@@ -38,9 +35,6 @@ def ask_ollama(prompt: str) -> str:
         raise HTTPException(status_code=502, detail=f"Ollama error: {e}")
 
 
-# ─────────────────────────────────────────────
-#  Live NHL data
-# ─────────────────────────────────────────────
 def get_live_nhl_data():
     try:
         response = requests.get("https://api-web.nhle.com/v1/standings/now", timeout=10)
@@ -112,9 +106,6 @@ def get_live_nhl_data():
     return live_database
 
 
-# ─────────────────────────────────────────────
-#  Request models
-# ─────────────────────────────────────────────
 class MatchupRequest(BaseModel):
     team_a: str
     team_b: str
@@ -126,9 +117,6 @@ class GameResultRequest(BaseModel):
     score_b: int
 
 
-# ─────────────────────────────────────────────
-#  Endpoints
-# ─────────────────────────────────────────────
 @app.get("/api/teams")
 def get_teams():
     nhl_data = get_live_nhl_data()
